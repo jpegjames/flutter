@@ -16,9 +16,9 @@
 
   <div class="actions">
     <% if post.likes.where(user: current_user).first %>
-      <%= link_to '', post_like_path(post_id: post.id), class: 'fa fa-heart', method: :post %>
+      <%= link_to '', post_like_path(post_id: post.id), class: 'fa fa-heart like', method: :post, remote: true %>
     <% else %>
-      <%= link_to '', post_like_path(post_id: post.id), class: 'fa fa-heart-o', method: :post %>
+      <%= link_to '', post_like_path(post_id: post.id), class: 'fa fa-heart-o like', method: :post, remote: true %>
     <% end %>
 
     <% if current_user == post.user %>

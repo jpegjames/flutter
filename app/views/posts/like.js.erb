@@ -1,0 +1,5 @@
+<% if @user_likes %>
+  $('#post-<%= @post.id %> .like').addClass('fa-heart').removeClass('fa-heart-o');
+<% else %>
+  $('#post-<%= @post.id %> .like').addClass('fa-heart-o').removeClass('fa-heart');
+<% end %>

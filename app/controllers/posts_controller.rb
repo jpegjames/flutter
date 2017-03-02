@@ -56,16 +56,19 @@ class PostsController < ApplicationController
 
   # POST /posts/1/like
   def like
-    like = @post.likes.where(user: current_user).first_or_initialize
+    @like = @post.likes.where(user: current_user).first_or_initialize
 
-    if like.new_record?
-      like.save
+    if @like.new_record?
+      @user_likes = true
+      @like.save
     else
-      like.destroy
+      @user_likes = false
+      @like.destroy
     end
 
     respond_to do |format|
       format.html { redirect_to :back }
+      format.js {}
     end
   end
 
