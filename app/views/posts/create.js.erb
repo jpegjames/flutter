@@ -1,0 +1,2 @@
+$('.post-container').prepend("<%= j render partial: 'post', locals: { post: @post, start_hidden: true } %>");
+$('#post-<%= @post.id %>').slideDown(250);

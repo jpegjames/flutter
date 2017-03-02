@@ -1,0 +1,28 @@
+<%
+  start_hidden ||= false
+%>
+
+<div class="post" data-post-id="<%= post.id %>" id="post-<%= post.id %>" style="<%= 'display: none;' if start_hidden %>">
+  <div class="profile-section">
+    <%= image_tag post.user.avatar.url(:thumb) %>
+  </div>
+
+  <div class="content">
+    <%= post.body %>
+    <p class="author">
+      <%= link_to post.user, user_path(post.user) %> - <%= post.created_at %>
+    </p>
+  </div>
+
+  <div class="actions">
+    <% if post.likes.where(user: current_user).first %>
+      <%= link_to '', post_like_path(post_id: post.id), class: 'fa fa-heart', method: :post %>
+    <% else %>
+      <%= link_to '', post_like_path(post_id: post.id), class: 'fa fa-heart-o', method: :post %>
+    <% end %>
+
+    <% if current_user == post.user %>
+      <%= link_to '', post, method: :delete, class: 'fa fa-trash', remote: true, data: {confirm: 'Are you sure?'} %>
+    <% end %>
+  </div>
+</div>
