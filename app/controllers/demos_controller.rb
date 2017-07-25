@@ -11,7 +11,7 @@ class DemosController < ApplicationController
     ActiveRecord::Base.connection.execute("CREATE DATABASE #{ new_demo_db } WITH TEMPLATE #{ template_demo_db } OWNER #{ ENV['DB_USERNAME'] };")
 
     # set session for new db
-    session[:demo_db] = demo_db
+    session[:demo_db] = new_demo_db
 
     # Optional: login code (if applicable)
     # add your own login code or method here
