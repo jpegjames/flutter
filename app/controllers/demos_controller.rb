@@ -1,6 +1,6 @@
 class DemosController < ApplicationController
   before_filter :reset_demo_database, only: [:new]
-  skip_before_filter :set_demo_database, only: [:new]
+  skip_before_filter :set_demo_database
 
   def new
     # Optional: setting session[:demo_db] to nil will reset the demo
