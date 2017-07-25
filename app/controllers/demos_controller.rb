@@ -5,15 +5,10 @@ class DemosController < ApplicationController
   end
 
   def create
-    # make db/demos dir if doesn't exist
-    unless File.directory?('db/demos/')
-      FileUtils.mkdir('db/demos/')
-    end
-
     # copy master 'demo' database
     master_db = default_demo_database
-    demo_db = "db/demos/demo-#{Time.now.to_i}-#{SecureRandom.base64.tr("+/", "360")[0..8]}.sqlite3"
-    FileUtils::cp master_db, demo_db
+    demo_db = "demo_database_#{Time.now.to_i}_#{SecureRandom.base64.tr("+/", "360")[0..3]}"
+    ActiveRecord::Base.connection.execute('CREATE DATABASE demo_database_001 WITH TEMPLATE demo_template OWNER uwof48;')
 
     # set session for new db
     session[:demo_db] = demo_db
