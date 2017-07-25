@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
       if Rails.env == 'demo'
 
         if session[:demo_db]
-          db_name = "#{session[:demo_db]}"
+          db_name = session[:demo_db]
         else
           # Use default 'demo' database
           db_name = default_demo_database
