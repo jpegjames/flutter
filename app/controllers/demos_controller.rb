@@ -11,6 +11,8 @@ class DemosController < ApplicationController
     # copy master 'demo' database
     template_demo_db = default_demo_database
     new_demo_db = "demo_database_#{Time.now.to_i}".downcase # PG databases are case senstive but created lowercase by default
+
+    ActiveRecord::Base.connection.execute("SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'originaldb' AND pid <> pg_backend_pid();")
     ActiveRecord::Base.connection.execute("CREATE DATABASE #{ new_demo_db } WITH TEMPLATE #{ template_demo_db } OWNER uxkfu2;")
 
     # set session for new db
