@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
 
     # Returns the default demo database path defined in config/database.yml
     def default_demo_database
-      return YAML.load_file("#{Rails.root.to_s}/config/database.yml")['demo']['database']
+      return 'demo_template'
     end
 
 
