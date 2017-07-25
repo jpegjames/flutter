@@ -33,6 +33,14 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    # TESTING CODE
+    def reset_demo_database
+      # method only necessary for 'demo' environment
+      if Rails.env == 'demo'
+        ActiveRecord::Base.establish_connection(demo_connection(default_demo_database))
+      end
+    end
+
     # Returns the current database configuration hash
     def default_connection
       @default_config ||= ActiveRecord::Base.connection.instance_variable_get("@config").dup

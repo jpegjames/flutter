@@ -1,4 +1,5 @@
 class DemosController < ApplicationController
+  before_filter :reset_demo_database, only: [:new]
   skip_before_filter :set_demo_database, only: [:new]
 
   def new
