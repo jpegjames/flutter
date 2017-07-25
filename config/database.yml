@@ -19,14 +19,23 @@ development:
 #   timeout: 5000
 #   database: db/demo.sqlite3
 
+# demo:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: demo_template
+#   pool: 5
+#   username: <%= ENV['DB_USERNAME'] %>
+#   password: <%= ENV['DB_PASSWORD'] %>
+#   host: <%= ENV['DB_ADDRESS'] %>
+
 demo:
-  adapter: postgresql
-  encoding: unicode
-  database: demo_template
-  pool: 5
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 20
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
-  host: <%= ENV['DB_ADDRESS'] %>
+  database: demo_template
 
 
 # Warning: The database defined as "test" will be erased and

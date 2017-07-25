@@ -37,7 +37,7 @@ gem "paperclip", "~> 5.0.0"
 # gem 'capistrano-rails', group: :development
 
 group :demo, :production do
-  gem 'pg'
+  gem 'mysql2'
 end
 
 group :development, :test do
