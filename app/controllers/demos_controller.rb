@@ -17,8 +17,12 @@ class DemosController < ApplicationController
     system("mysqladmin -u#{ ENV['DB_ADMIN'] } -p#{ ENV['DB_ADMIN_PASSWORD'] } create #{new_demo_db}")
 
     # Load template sql (returns true if shell command succeeds)
-    # mysql -u[db_admin] -p[db_password] [new_db_name] <
+    # mysql -u[db_admin] -p[db_password] [new_db_name]
     system("mysql -u#{ ENV['DB_ADMIN'] } -p#{ ENV['DB_ADMIN_PASSWORD'] } #{new_demo_db} < db/demo_template.sql")
+
+    # Load template sql (returns true if shell command succeeds)
+    # 
+    system("mysql -u#{ ENV['DB_ADMIN'] } -p#{ ENV['DB_ADMIN_PASSWORD'] } -e \"GRANT ALL on #{new_demo_db}.* TO '#{ ENV['DB_USERNAME'] }'@'%';\"")
 
     # set session for new db
     session[:demo_db] = new_demo_db
