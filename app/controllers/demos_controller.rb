@@ -1,4 +1,6 @@
 class DemosController < ApplicationController
+  skip_before_filter :set_demo_database, only: [:new]
+
   def new
     # Optional: setting session[:demo_db] to nil will reset the demo
     session[:demo_db] = nil
