@@ -6,9 +6,9 @@ class DemosController < ApplicationController
 
   def create
     # copy master 'demo' database
-    master_db = default_demo_database
-    demo_db = "demo_database_#{Time.now.to_i}_#{SecureRandom.base64.tr("+/", "360")[0..3]}"
-    ActiveRecord::Base.connection.execute('CREATE DATABASE demo_database_001 WITH TEMPLATE demo_template OWNER uwof48;')
+    template_demo_db = default_demo_database
+    new_demo_db = "demo_database_#{Time.now.to_i}_#{SecureRandom.base64.tr("+/", "360")[0..3]}"
+    ActiveRecord::Base.connection.execute("CREATE DATABASE #{ new_demo_db } WITH TEMPLATE #{ template_demo_db } OWNER #{ ENV['DB_USERNAME'] };")
 
     # set session for new db
     session[:demo_db] = demo_db
